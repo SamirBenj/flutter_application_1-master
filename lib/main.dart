@@ -37,28 +37,28 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   List todos = List.empty();
-  String title = "";
-  String description = "";
+  // String title = "";
+  // String description = "";
   @override
   void initState() {
     super.initState();
-    todos = ["hello", "hey There"];
+    // todos = ["hello", "hey There"];
   }
 
   TextEditingController usernameController = TextEditingController();
-  createToDo() {
-    DocumentReference documentReference =
-        FirebaseFirestore.instance.collection("MyTodos").doc(title);
+  // createToDo() {
+  //   DocumentReference documentReference =
+  //       FirebaseFirestore.instance.collection("MyTodos").doc(title);
 
-    Map<String, String> todoList = {
-      "todoTitle": title,
-      "todoDesc": description
-    };
+  //   Map<String, String> todoList = {
+  //     "todoTitle": title,
+  //     "todoDesc": description
+  //   };
 
-    documentReference
-        .set(todoList)
-        .whenComplete(() => print("Data stored sucessfully"));
-  }
+  //   documentReference
+  //       .set(todoList)
+  //       .whenComplete(() => print("Data stored sucessfully"));
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -89,11 +89,9 @@ class _MyHomePageState extends State<MyHomePage> {
                 builder: (context, snapshot) => ListView.builder(
                   itemCount: snapshot.data!.docs.length,
                   itemBuilder: (BuildContext context, int index) {
-                    print(
-                        snapshot.data!.docs.map((e) => print(e["Age"][index])));
-                    print('hello');
-                    // var myData = snapshot.data!.docs as DocumentSnapshot;
-                    return Text("");
+                    print(snapshot.data!.docs[index]["Age"]);
+                    var age = snapshot.data!.docs[index]["Age"];
+                    return Text(age);
                   },
                 ),
               ),
@@ -103,10 +101,11 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          FirebaseFirestore.instance
-              .collection("MyCollection")
-              .doc("QpSjEHSocCHkecsVVbPT")
-              .delete();
+          FirebaseFirestore.instance.collection("MyCollection").doc().set(
+            {
+              "Age": "SALUT !!",
+            },
+          );
           // showDialog(
           //     context: context,
           //     builder: (BuildContext context) {
