@@ -91,7 +91,18 @@ class _MyHomePageState extends State<MyHomePage> {
                   itemBuilder: (BuildContext context, int index) {
                     print(snapshot.data!.docs[index]["Age"]);
                     var age = snapshot.data!.docs[index]["Age"];
-                    return Text(age);
+                    return Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Container(
+                        padding: EdgeInsets.all(10),
+                        decoration: BoxDecoration(
+                            color: Colors.cyan,
+                            borderRadius: BorderRadius.circular(
+                              10,
+                            )),
+                        child: Text("Age: " + age),
+                      ),
+                    );
                   },
                 ),
               ),
